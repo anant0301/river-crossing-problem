@@ -160,7 +160,7 @@ void board_boat(int ianimal, Queue *q, pthread_cond_t *waitcond, pthread_cond_t 
     else
     {
         // last species on the boat
-        // printf("continue %d\n", q->capacity);
+        printf("Last of its kind %d\n", ianimal);
         boat->mem[boat->nmem++] = ianimal;
         pthread_cond_signal(boardingcond);
 
