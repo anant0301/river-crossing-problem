@@ -1,7 +1,7 @@
 #include "headers.h"
 
 int nboats_rowed = 0;
-
+int last_boat_flag = 1;
 Boat *boat;
 Rats *rats;
 Lions *lions;
@@ -13,11 +13,12 @@ pthread_t *kill_threads;
 // thread primitives required
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
+pthread_cond_t last_boat = PTHREAD_COND_INITIALIZER;
+pthread_cond_t row_boat_cond = PTHREAD_COND_INITIALIZER;
 pthread_cond_t rat_board_cond = PTHREAD_COND_INITIALIZER;
 pthread_cond_t lion_board_cond = PTHREAD_COND_INITIALIZER;
 pthread_cond_t rat_on_boarding = PTHREAD_COND_INITIALIZER;
 pthread_cond_t lion_on_boarding = PTHREAD_COND_INITIALIZER;
-pthread_cond_t row_boat_cond = PTHREAD_COND_INITIALIZER;
 
 void initialize(char *instring, int nlion, int nrat)
 {
@@ -137,6 +138,7 @@ void board_boat(int ianimal, Queue *q, pthread_cond_t *waitcond, pthread_cond_t 
 {
     do {
         pthread_cond_wait(waitcond, &lock);
+        // printf("%d\n", ianimal);
     } while(boat->nmem == 4 || ianimal != peek(q));
     dequeue(q);
     // printf("Before: %d %d\n", q->front, ianimal);
@@ -147,12 +149,14 @@ void board_boat(int ianimal, Queue *q, pthread_cond_t *waitcond, pthread_cond_t 
         {
             // odd no of animal of same species on boat
             boat->mem[boat->nmem++] = ianimal;
+            // printf("Odd: %d %d\n", ianimal, boat->nmem);
             pthread_cond_signal(boardingcond);
         }
         else
         {
             // even no of animal of same species on boat
             pthread_cond_signal(waitcond);
+            // printf("Even: %d %d\n", ianimal, boat->nmem);
             pthread_cond_wait(boardingcond, &lock);
             boat->mem[boat->nmem++] = ianimal;
         }
@@ -160,10 +164,9 @@ void board_boat(int ianimal, Queue *q, pthread_cond_t *waitcond, pthread_cond_t 
     else
     {
         // last species on the boat
-        // printf("continue %d\n", q->capacity);
+        // printf("Last of its kind %d\n", ianimal);
         boat->mem[boat->nmem++] = ianimal;
         pthread_cond_signal(boardingcond);
-
     }
     pthread_cond_signal(&row_boat_cond);
     // printf("After: %d %d\n", ianimal, boat->nmem);
@@ -205,6 +208,8 @@ void *row_boat(void *p)
     }
     if (left) {
         int x;
+        // pthread_cond_signal(&last_boat);
+        // pthread_cond_wait(&row_boat_cond, &lock);
         printf("Boat %d Rowed:\n", nboats_rowed++);
         for (int i = 0; i < left; ++i)
         {

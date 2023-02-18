@@ -2,3 +2,9 @@ l 1 0
 r 0 1
 rl 1 1
 lr 1 1
+llll 4 0
+lllr 3 1
+llrr 2 2
+lrrr 1 3
+rrrr 0 4
+lrrrlrrlr 3 6
