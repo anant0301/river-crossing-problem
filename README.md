@@ -39,7 +39,7 @@ Lion: 5
 Rat: 6
 Rat: 7
 ```
-
+<!-- 
 ### Shared State
 1. Rats:
     - RatArrive:
@@ -57,4 +57,4 @@ Rat: 7
 |rat0 wait for onboard signal |rat1 arrive |rat2 arrive|
 |rat1 wait for onboard signal|||
 | |rat1 passes onboards signal||
-|-|-|-|
+|-|-|-| -->
