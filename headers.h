@@ -57,9 +57,10 @@ void *row_boat(void *);
 // queue operations
 int is_empty(Queue *);
 int is_full(Queue *);
-int get_count(Queue *);
 int dequeue(Queue *);
 int enqueue(Queue *, int);
+int get_count(Queue *);
+int peek(Queue *queue);
 Queue *init_queue(int capacity);
 
 #endif
