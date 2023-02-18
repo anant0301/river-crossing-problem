@@ -201,19 +201,9 @@ void *row_boat(void *p)
                 printf("Rat: %d\n", boat->mem[i]);
             }
         }
-        printf("------------------------------------\n");
-        // ++nboats_rowed;
+        // printf("------------------------------------\n");
         left -= 4;
         boat->nmem = 0;
-        // sleep(1);
-        // if (lions->lion_q->capacity != lions->lion_q->front)
-        // {
-        //     pthread_cond_signal(&lion_board_cond);
-        // }
-        // if (rats->rat_q->capacity != rats->rat_q->front)
-        // {
-        //     pthread_cond_signal(&rat_board_cond);
-        // }
         pthread_cond_signal(&rat_board_cond);
         pthread_cond_signal(&lion_board_cond);
     }
@@ -235,8 +225,7 @@ void *row_boat(void *p)
                 printf("Rat: %d\n", x);
             }
         }
-        printf("------------------------------------\n");
-        
+        // printf("------------------------------------\n");
     }
     for (int i = 0; i < len; i++) {
         pthread_kill(kill_threads[i], KILLSIGN);
