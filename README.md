@@ -28,8 +28,16 @@ Second Line Numbers in ascending order denoting time when a lion enters
 ### Output
 Index of rats/lions rowed in boat.
 ```
-Boat 0 Rowed: 0 2 1 3
-Boat 1 Rowed: 4 5 6 7
+Boat 0 Rowed: 
+Lion: 0
+Lion: 2
+Rat: 1
+Rat: 3
+Boat 1 Rowed:
+Lion: 4
+Lion: 5
+Rat: 6
+Rat: 7
 ```
 
 ### Shared State
