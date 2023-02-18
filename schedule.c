@@ -182,10 +182,6 @@ void *row_boat(void *p)
         )
         {
             pthread_cond_wait(&row_boat_cond, &lock);
-            // printf("lions->lion_q->front: %d  boat->nmem: %d\n", lions->lion_q->front, boat->nmem);
-            // printf("rats->rat_q->front: %d  boat->nmem: %d\n", rats->rat_q->front, boat->nmem);
-            // printf("rats->rat_q->capacity: %d  boat->nmem: %d\n", rats->rat_q->capacity, boat->nmem);
-            // printf("lions->lion_q->capacity: %d  boat->nmem: %d\n", lions->lion_q->capacity, boat->nmem);
         }
         printf("Boat %d Rowed:\n", nboats_rowed++);
         for (int i = 0; i < boat->nmem; ++i)
