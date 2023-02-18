@@ -51,7 +51,7 @@ void *lion_routine(void *);
 // given function definitions
 void rat_arrive(Rat);
 void lion_arrive(Lion);
-void board_boat(Queue *, pthread_cond_t *, pthread_cond_t *);
+void board_boat(int, Queue *, pthread_cond_t *, pthread_cond_t *);
 void *row_boat(void *);
 
 // queue operations
